@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /************Requirement #5**************/
+/**********and Stretch Goal 1************/
 
 namespace BankheadKatie_R365
 {
@@ -13,12 +14,10 @@ namespace BankheadKatie_R365
         static void Main(string[] args)
         {
             //declare vars
-            double sum;
+            double sum = 0;
             string[] sDelimiters = { ",", "\\n" }; //add newline char as delimiter
             List<double> dNegatives = new List<double>();
-
-            //reset vars
-            sum = 0;
+            string sFormula = ""; //for stretch goal 1
 
             //get inputs and separate into array
             Console.WriteLine("Enter numbers: ");
@@ -68,13 +67,23 @@ namespace BankheadKatie_R365
             //if there are no negative numbers
             if (dNegatives.Count <= 0)
             {
-                //do the addition
-                foreach (double addend in dAddends)
+                for (int i = 0; i < dAddends.Length; i++)
                 {
-                    sum += addend;
+                    //sum the numbers together
+                    sum += dAddends[i];
+
+                    //Stretch goal 1
+                    if (i == (dAddends.Length - 1))
+                    {
+                        sFormula += Convert.ToString(dAddends[i]) + " = ";
+                    }
+                    else
+                    {
+                        sFormula += Convert.ToString(dAddends[i]) + " + ";
+                    }
                 }
 
-                Console.WriteLine("Sum: " + sum);
+                Console.WriteLine(sFormula + sum);
             }
             else
             {
