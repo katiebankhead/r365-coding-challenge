@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/************Requirement #3**************/
+/************Requirement #4**************/
 
 namespace BankheadKatie_R365
 {
@@ -15,6 +15,7 @@ namespace BankheadKatie_R365
             //declare vars
             double sum;
             string[] sDelimiters = { ",", "\\n" }; //add newline char as delimiter
+            List<double> dNegatives = new List<double>();
 
             //reset vars
             sum = 0;
@@ -39,7 +40,7 @@ namespace BankheadKatie_R365
 
                 foreach (char character in sInput)
                 {
-                    if ((!Char.IsNumber(character)) && (character != '.'))
+                    if ((!Char.IsNumber(character)) && (character != '.') && (character != '-'))
                     {
                         sAddends[i] = "0";
                     }
@@ -49,13 +50,39 @@ namespace BankheadKatie_R365
             //convert from string to double
             double[] dAddends = Array.ConvertAll(sAddends, new Converter<string, double>(stringToDouble));
 
-            //do the addition
-            foreach (double addend in dAddends)
+            //find negative numbers and deny
+            for (int i = 0; i < dAddends.Length; i++)
             {
-                sum += addend;
+                if (dAddends[i] < 0)
+                {
+                    //add to list of negative numbers
+                    dNegatives.Add(dAddends[i]);
+                }
             }
 
-            Console.WriteLine("Sum: " + sum);
+            //if there are no negative numbers
+            if (dNegatives.Count <= 0)
+            {
+                //do the addition
+                foreach (double addend in dAddends)
+                {
+                    sum += addend;
+                }
+
+                Console.WriteLine("Sum: " + sum);
+            }
+            else
+            {
+                Console.WriteLine("You entered the following negative numbers:");
+
+                foreach (double negative in dNegatives)
+                {
+                    Console.WriteLine(negative);
+                }
+
+                Console.WriteLine("No negative numbers are allowed.");
+            }
+
 
             Console.ReadKey();
         }
