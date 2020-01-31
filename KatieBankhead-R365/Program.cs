@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/************Requirement #2**************/
+/************Requirement #3**************/
 
 namespace BankheadKatie_R365
 {
@@ -14,17 +14,19 @@ namespace BankheadKatie_R365
         {
             //declare vars
             double sum;
+            string[] sDelimiters = { ",", "\\n" }; //add newline char as delimiter
 
             //reset vars
             sum = 0;
 
             //get inputs and separate into array
-            Console.WriteLine("Enter numbers separated by commas (ex '5,6'): ");
-            string[] sAddends = Console.ReadLine().Split(',');
+            Console.WriteLine("Enter numbers: ");
+            string[] sAddends = Console.ReadLine().Split(sDelimiters, System.StringSplitOptions.RemoveEmptyEntries);
 
             //Requirement 1 error handling
             //iterate through string array
-            for (int i = 0; i < sAddends.Length; i++)
+            for (
+                int i = 0; i < sAddends.Length; i++)
             {
                 //empty or missing numbers
                 if (sAddends[i] == "" || sAddends[i] == ".")
