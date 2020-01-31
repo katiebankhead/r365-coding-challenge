@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/************Requirement #4**************/
+/************Requirement #5**************/
 
 namespace BankheadKatie_R365
 {
@@ -50,13 +50,18 @@ namespace BankheadKatie_R365
             //convert from string to double
             double[] dAddends = Array.ConvertAll(sAddends, new Converter<string, double>(stringToDouble));
 
-            //find negative numbers and deny
+            //Step 4: find negative numbers and deny
+            //Step 5: make any value greater than 1000 an invalid number
             for (int i = 0; i < dAddends.Length; i++)
             {
                 if (dAddends[i] < 0)
                 {
                     //add to list of negative numbers
                     dNegatives.Add(dAddends[i]);
+                }
+                else if (dAddends[i] > 1000)
+                {
+                    dAddends[i] = 0;
                 }
             }
 
