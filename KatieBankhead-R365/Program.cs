@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/************Requirement #5**************/
+/************Requirement #6**************/
 /**********and Stretch Goal 1************/
 
 namespace BankheadKatie_R365
@@ -15,13 +15,30 @@ namespace BankheadKatie_R365
         {
             //declare vars
             double sum = 0;
-            string[] sDelimiters = { ",", "\\n" }; //add newline char as delimiter
             List<double> dNegatives = new List<double>();
             string sFormula = ""; //for stretch goal 1
+            string[] sDelimiters = { ",", "\\n", "," };
 
             //get inputs and separate into array
             Console.WriteLine("Enter numbers: ");
-            string[] sAddends = Console.ReadLine().Split(sDelimiters, System.StringSplitOptions.RemoveEmptyEntries);
+
+            //Step 6: determine custom char delimiter
+            string sFullEntry = Console.ReadLine();
+
+            //previous formats or requirement 6?
+            if (sFullEntry.Substring(0, 2) == "//")
+            {
+                string sCustDelimiter = sFullEntry.Substring(2, 1);
+
+                //replace third array value with the custom delimiter
+                sDelimiters[2] = sCustDelimiter;
+
+                //cut off string prefix
+                //only numeric inputs remain
+                sFullEntry = sFullEntry.Substring(5);
+            }
+
+            string[] sAddends = sFullEntry.Split(sDelimiters, System.StringSplitOptions.RemoveEmptyEntries);
 
             //Requirement 1 error handling
             //iterate through string array
@@ -96,7 +113,6 @@ namespace BankheadKatie_R365
 
                 Console.WriteLine("No negative numbers are allowed.");
             }
-
 
             Console.ReadKey();
         }
